@@ -12,7 +12,8 @@
 
 
 // TO DO LIST
-// Make the table dynamic absed on the number of weeks inputed, link above
+// Current dates are placeholders, update this so that it adds correct dates
+// Make the table dynamic based on the number of weeks inputed, link above
 // read articles on why the for loop is used for events
 // I use rowCount many times, should i just turn it into a function? Its so short though so i dont think its worth it
 // Go through each line of the for loop that lets the cells become editable and write notes.
@@ -25,10 +26,41 @@
 
 
 let table = document.getElementById("mainTable");
-// let cells = table.getElementsByTagName("td");
 let cells = document.getElementsByClassName("cells");
 
 
+
+///////////////////////////////////////// Code here is related to dates
+let todayDate = new Date();
+
+// wrote this function to return date format mm/dd/yyy, you need to pass a
+// date, let xxx = new Date();
+function shortDate(date) {
+  let dayOfMonth = date.getDate();
+  let month = (date.getMonth()+1);
+  let year = date.getFullYear();
+  let shortDate = month + "/" + dayOfMonth + "/" + year;
+  return shortDate;
+}
+
+// This code gets next monday from given date
+function getNextMonday(date) {
+  date.setDate(date.getDate() + (((1 + 7 - date.getDay()) % 7) || 7));
+  return date;
+}
+
+// This function adds x days to given date
+function addDays(date, days) {
+  date.setDate(date.getDate() + days);
+  return date;
+}
+
+// I am setting the first row to have next Monday as the default date
+let startingDate = getNextMonday(todayDate);
+let firstDate = document.getElementById("firstDate");
+firstDate.innerHTML = shortDate(startingDate);
+
+///////////////////////////////////////// End of code related to dates
 
 
 
@@ -105,15 +137,15 @@ function addNewRow() {
   let row = table.insertRow(rowCount);
 
   for (let i = 0; i < cellCount; i++) {
-    // let newCell = "cell" + i;
-    // console.log(newCell);
+    // This creates an empty row
     let newCell = row.insertCell(i);
 
-    // this creates the cells, their values, and classes
+    // This creates the cells, their values, and classes in the empty row created
     if (i === 0) {
       newCell.innerHTML = rowCount;
     } else if (i === 1) {
-      newCell.innerHTML = "Placeholder for date";
+      let nextDate = shortDate(addDays(startingDate, 7));
+      newCell.innerHTML = nextDate;
     } else if (i === 9) {
       newCell.className = "weekTotal" + rowCount;
     } else {
@@ -131,14 +163,6 @@ function addNewRow() {
 
 
 
-
-
-for (let i = 0; i < cells.length; i++) {
-  cells[i].onclick = function() {
-
-    console.log("clicled");
-  }
-}
 
 
 
