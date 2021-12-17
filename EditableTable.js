@@ -16,18 +16,26 @@
 // Write a readme going through exactly how all of this works
 
 // TO DO LIST (lower priority)
-// Make the add rows more dynamic, right now i can only add rows once and thats it. Make it so you can add x rows, then add more rows, or delete some rows.
+// Make the add rows more dynamic, give ability to delete rows.
 // read articles on why the for loop is used for events
 // I use rowCount many times, should i just turn it into a function? Its so short though so i dont think its worth it
 
 
-// testing a change
 
 
+// Created a global variable that holds all the daily hours rows and week total cells
+let arrayOfDailyHoursRows = [];
+let arrayOfWeekTotalCells = [];
 
 
 let table = document.getElementById("mainTable");
 let cells = document.getElementsByClassName("cells");
+
+
+// I want to run these functions before the refresh so that I can get the
+// week total cell to work when loaded
+convertHoursInRowsToArray();
+convertWeekTotalCellsToArray();
 
 // Run this function first so that the page is responsive when loaded
 refresh();
@@ -45,7 +53,7 @@ function userSubmit() {
 
   // As of right now, things get messed up if you try to add rows multiple times
   // so I'm just removing the option after the first time you do it
-  document.getElementById("userInput").remove();
+  // document.getElementById("userInput").remove();
 }
 
 
@@ -86,9 +94,6 @@ firstDate.innerHTML = shortDate(startingDate);
 
 
 
-// Created a global variable that holds all the daily hours rows and week total cells
-let arrayOfDailyHoursRows = [];
-let arrayOfWeekTotalCells = [];
 
 // Created an array of daily hours for each row
 function convertHoursInRowsToArray() {
@@ -128,9 +133,6 @@ function convertWeekTotalCellsToArray() {
 // in the week total cell
 function updateWeekTotal() {
 
-  convertHoursInRowsToArray();
-  convertWeekTotalCellsToArray();
-
   let rowCount4 = table.rows.length;
 
   for (let i = 1; i < rowCount4; i++) {
@@ -142,6 +144,7 @@ function updateWeekTotal() {
 
     arrayOfWeekTotalCells[(i - 1)].forEach(day => day.innerHTML = totalHours)
   }
+
 }
 
 
@@ -155,6 +158,19 @@ function howManyRowsToAdd() {
   for (i = 0; i < numberOfRowsToAdd.value; i++) {
     addNewRow();
   }
+
+
+// After I add new rows i want to wipe the arrays of daily hours rows and week total
+// cells BEFORE i run the functions that pushes to them bc if i dont, the arrays
+// will keep pushing on top of each other and double count. I only want to create
+// these arrays when changes are made to the number of rows.
+  arrayOfDailyHoursRows = [];
+  arrayOfWeekTotalCells = [];
+
+  convertHoursInRowsToArray();
+  convertWeekTotalCellsToArray();
+
+
 }
 
 

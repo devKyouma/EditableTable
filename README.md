@@ -1,7 +1,7 @@
-# header
+# Create an editable table
 
-This is example
+These files can be used as a template for creating an editable table.
 
 
-*dsf
-*sd
+* dsf
+* sd
