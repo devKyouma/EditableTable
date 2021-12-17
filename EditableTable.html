@@ -17,9 +17,17 @@
   <!-- https://www.youtube.com/watch?v=uPBxzvSGIiA -->
 
 
+  <div id="userInput">
+    <label>How many weeks to plan? </label>
+    <input id="numberOfWeeksInput" type="text" name="" value="">
+
+    <button type="button" onclick="userSubmit()">Submit</button>
+  </div>
+
+
   <table id="mainTable">
     <tr>
-      <th class="test" >Week</th>
+      <th class="test">Week</th>
       <th>Date</th>
       <th>Monday</th>
       <th>Tuesday</th>
@@ -42,14 +50,23 @@
       <td class="row1 cells"> </td>
       <td class="weekTotal1"> </td>
     </tr>
+    <tr>
+      <td>2</td>
+      <td>12/20/21</td>
+      <td class="row2 cells">8</td>
+      <td class="row2 cells">6</td>
+      <td class="row2 cells"> </td>
+      <td class="row2 cells"> </td>
+      <td class="row2 cells"> </td>
+      <td class="row2 cells"> </td>
+      <td class="row2 cells"> </td>
+      <td class="weekTotal2"> </td>
+    </tr>
 
 
   </table>
 
 
-  <button type="button" onclick="addNewRow()">Add Row</button>
-
-  <button type="button" onclick="refresh()">Refresh</button>
 
 
   <script src="EditableTable.js"></script>

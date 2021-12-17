@@ -12,12 +12,13 @@
 
 
 // TO DO LIST
-// Current dates are placeholders, update this so that it adds correct dates
-// Make the table dynamic based on the number of weeks inputed, link above
+// Go through each line of the for loop that lets the cells become editable and write notes.
+// Write a readme going through exactly how all of this works
+
+// TO DO LIST (lower priority)
+// Make the add rows more dynamic, right now i can only add rows once and thats it. Make it so you can add x rows, then add more rows, or delete some rows.
 // read articles on why the for loop is used for events
 // I use rowCount many times, should i just turn it into a function? Its so short though so i dont think its worth it
-// Go through each line of the for loop that lets the cells become editable and write notes.
-
 
 
 // testing a change
@@ -28,6 +29,24 @@
 let table = document.getElementById("mainTable");
 let cells = document.getElementsByClassName("cells");
 
+// Run this function first so that the page is responsive when loaded
+refresh();
+
+// This is the
+function userSubmit() {
+
+  howManyRowsToAdd();
+  updateWeekTotal();
+
+  // This is here to update the cells variable since there are now new cells, but
+  // the code for the onclick is still not working.
+  cells = document.getElementsByClassName("cells");
+  refresh();
+
+  // As of right now, things get messed up if you try to add rows multiple times
+  // so I'm just removing the option after the first time you do it
+  document.getElementById("userInput").remove();
+}
 
 
 ///////////////////////////////////////// Code here is related to dates
@@ -127,6 +146,18 @@ function updateWeekTotal() {
 
 
 
+
+function howManyRowsToAdd() {
+  // This gets the number inputed into the input
+  let numberOfRowsToAdd = document.getElementById("numberOfWeeksInput");
+
+// This runs the addNewRow function for the amount of times entered
+  for (i = 0; i < numberOfRowsToAdd.value; i++) {
+    addNewRow();
+  }
+}
+
+
 // Dynamically add rows
 // https://www.etutorialspoint.com/index.php/11-dynamically-add-delete-html-table-rows-using-javascript
 // https://www.w3schools.com/jsref/met_table_insertrow.asp
@@ -151,14 +182,8 @@ function addNewRow() {
     } else {
       newCell.className = "cells row" + rowCount;
     }
-
-    updateWeekTotal();
   }
 
-  // This is here to update the cells variable since there are now new cells, but
-  // the code for the onclick is still not working.
-  cells = document.getElementsByClassName("cells");
-  refresh();
 }
 
 
