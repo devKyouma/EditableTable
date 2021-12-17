@@ -21,6 +21,7 @@
 // I use rowCount many times, should i just turn it into a function? Its so short though so i dont think its worth it
 
 
+///////////////////////////////////////// Starting code ran immediately
 
 
 // Created a global variable that holds all the daily hours rows and week total cells
@@ -40,7 +41,22 @@ convertWeekTotalCellsToArray();
 // Run this function first so that the page is responsive when loaded
 refresh();
 
-// This is the
+let todayDate = new Date();
+
+// I am setting the first row to have next Monday as the default date
+let startingDate = getNextMonday(todayDate);
+let firstDate = document.getElementById("firstDate");
+firstDate.innerHTML = shortDate(startingDate);
+
+///////////////////////////////////////// End of code ran immediately
+
+
+
+
+///////////////////////////////////////// ALL CODE BELOW ARE FUNCTIONS
+
+
+// This is the function tied to the user input and button
 function userSubmit() {
 
   howManyRowsToAdd();
@@ -51,16 +67,12 @@ function userSubmit() {
   cells = document.getElementsByClassName("cells");
   refresh();
 
-  // As of right now, things get messed up if you try to add rows multiple times
-  // so I'm just removing the option after the first time you do it
-  // document.getElementById("userInput").remove();
 }
 
 
 ///////////////////////////////////////// Code here is related to dates
-let todayDate = new Date();
 
-// wrote this function to return date format mm/dd/yyy, you need to pass a
+// This function returns the date format mm/dd/yyy, you need to pass a
 // date, let xxx = new Date();
 function shortDate(date) {
   let dayOfMonth = date.getDate();
@@ -81,11 +93,6 @@ function addDays(date, days) {
   date.setDate(date.getDate() + days);
   return date;
 }
-
-// I am setting the first row to have next Monday as the default date
-let startingDate = getNextMonday(todayDate);
-let firstDate = document.getElementById("firstDate");
-firstDate.innerHTML = shortDate(startingDate);
 
 ///////////////////////////////////////// End of code related to dates
 
