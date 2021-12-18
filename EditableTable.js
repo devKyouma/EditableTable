@@ -17,7 +17,6 @@
 
 // TO DO LIST (lower priority)
 // Make the add rows more dynamic, give ability to delete rows.
-// read articles on why the for loop is used for events
 // I use rowCount many times, should i just turn it into a function? Its so short though so i dont think its worth it
 
 
@@ -223,6 +222,8 @@ function addNewRow() {
 function refresh() {
 
 // This for loop is what lets me click and edit each cell
+
+// This for loop creates an onclick listener for every cell in the table
   for (let i = 0; i < cells.length; i++) {
     cells[i].onclick = function() {
 
